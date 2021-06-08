@@ -189,7 +189,21 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                         final List<Classifier.Recognition> results = detector.recognizeImage(croppedBitmap);
                         lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
 
-                        Log.e("CHECK", "run: " + results.size());
+                        // Log.e("CHECK", "run: " + results.size());
+
+                        try {
+                            if (results.size() > 0 && results != null) {
+                                for (Classifier.Recognition result : results) {
+                                    Log.e("CHECK", "run: " + result.toString());
+                                    Log.e("CHECK", "run: " + result.getTitle());
+
+                                }
+                            }
+
+                        } catch (Exception e) {
+
+                        }
+
 
                         cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
                         final Canvas canvas = new Canvas(cropCopyBitmap);
