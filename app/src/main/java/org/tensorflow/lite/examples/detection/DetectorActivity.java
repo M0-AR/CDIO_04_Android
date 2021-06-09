@@ -33,8 +33,13 @@ import android.util.TypedValue;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.tensorflow.lite.examples.detection.customview.OverlayView;
 import org.tensorflow.lite.examples.detection.customview.OverlayView.DrawCallback;
@@ -64,6 +69,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
     private static final boolean SAVE_PREVIEW_BITMAP = false;
     private static final float TEXT_SIZE_DIP = 10;
+
+    public static Set<String> cardName = new HashSet<>();
+
     OverlayView trackingOverlay;
     private Integer sensorOrientation;
 
@@ -196,12 +204,14 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                 for (Classifier.Recognition result : results) {
                                     Log.e("CHECK", "run: " + result.toString());
                                     Log.e("CHECK", "run: " + result.getTitle());
-
+                                    Log.e("CHECK", "run: " + result.getConfidence());
+                                    if (result.getConfidence() > 0.90)
+                                        cardName.add(result.getTitle());
                                 }
                             }
-
+                            Log.e("CHECK", cardName.toString());
                         } catch (Exception e) {
-
+                            Log.e("CHECK", e.toString());
                         }
 
 
