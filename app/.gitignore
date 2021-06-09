@@ -1,2 +1,4 @@
 /build
 /build/
+
+app/src/main/assets/custom_yolov4_fp16.tflite
