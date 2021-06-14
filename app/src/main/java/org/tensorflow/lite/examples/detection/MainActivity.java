@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -40,10 +41,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         cameraButton = findViewById(R.id.cameraButton);
+        snapShotButton = findViewById(R.id.take_snapShot_camera);
         detectButton = findViewById(R.id.detectButton);
         imageView = findViewById(R.id.imageView);
 
         cameraButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DetectorActivity.class)));
+        snapShotButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SnapShotActivity.class)));
 
         detectButton.setOnClickListener(v -> {
             Handler handler = new Handler();
@@ -57,13 +60,18 @@ public class MainActivity extends AppCompatActivity {
                             Log.e("CHECK", "run: " + result.getTitle());
                         }
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
                 handler.post(() -> handleResult(cropBitmap, results));
             }).start();
 
         });
+
+       // this.sourceBitmap = Utils.getBitmapFromAsset(MainActivity.this, "test.jpg");
         this.sourceBitmap = Utils.getBitmapFromAsset(MainActivity.this, "test.jpg");
 
+
+//        this.cropBitmap = Utils.processBitmap(sourceBitmap, TF_OD_API_INPUT_SIZE);
         this.cropBitmap = Utils.processBitmap(sourceBitmap, TF_OD_API_INPUT_SIZE);
 
         this.imageView.setImageBitmap(cropBitmap);
@@ -98,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     private Bitmap sourceBitmap;
     private Bitmap cropBitmap;
 
-    private Button cameraButton, detectButton;
+    private Button cameraButton, detectButton, snapShotButton;
     private ImageView imageView;
 
     private void initBox() {
