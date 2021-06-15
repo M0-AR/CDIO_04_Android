@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
        // this.sourceBitmap = Utils.getBitmapFromAsset(MainActivity.this, "test.jpg");
-        this.sourceBitmap = Utils.getBitmapFromAsset(MainActivity.this, "test.jpg");
+        this.sourceBitmap = Utils.getBitmapFromAsset(MainActivity.this, "test01.jpg");
 
 
 //        this.cropBitmap = Utils.processBitmap(sourceBitmap, TF_OD_API_INPUT_SIZE);
@@ -146,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private boolean isSecondTime = false;
+
     private void handleResult(Bitmap bitmap, List<Classifier.Recognition> results) {
         final Canvas canvas = new Canvas(bitmap);
         final Paint paint = new Paint();
@@ -155,6 +157,16 @@ public class MainActivity extends AppCompatActivity {
 
         final List<Classifier.Recognition> mappedRecognitions =
                 new LinkedList<Classifier.Recognition>();
+
+        // Clean up the red rectangle
+//        if (isSecondTime) {
+//            for (final Classifier.Recognition result : results) {
+//                final RectF location = result.getLocation();
+//                if (location != null && result.getConfidence() >= MINIMUM_CONFIDENCE_TF_OD_API) {
+//                    //canvas
+//                }
+//            }
+//        }
 
         for (final Classifier.Recognition result : results) {
             final RectF location = result.getLocation();
