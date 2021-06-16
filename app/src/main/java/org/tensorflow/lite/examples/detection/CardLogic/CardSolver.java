@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class CardSolver {
 
 
-    public Pile[] solveGame(Pile[] rowCard
-    ) {
+    public Pile[] solveGame(Pile[] rowCard)
+    {
 
         System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
         for (int i = 0; i < rowCard.length ; i++) {

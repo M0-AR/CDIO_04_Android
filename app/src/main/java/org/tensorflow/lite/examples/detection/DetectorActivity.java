@@ -195,7 +195,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                         // Log.e("CHECK", "run: " + results.size());
                         cardMovement.setOnClickListener(v -> {
                             try {
-                                if (results.size() > 0 && results != null) {
+                                if (results.size() > 0) {
                                     for (Classifier.Recognition result : results) {
                                         Log.e("CHECK", "run: " + result.toString());
                                         Log.e("CHECK", "run: " + result.getTitle());
@@ -211,7 +211,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                             } catch (Exception e) {
                                 Log.e("CHECK", e.toString());
                             }
-                        });
+                        }); // EndOfCardMovement
+
+
+
 
 
                         cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
