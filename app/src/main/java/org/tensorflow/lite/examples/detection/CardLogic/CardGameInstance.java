@@ -2,17 +2,22 @@ package org.tensorflow.lite.examples.detection.CardLogic;
 import org.tensorflow.lite.examples.detection.DetectorActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 
 public class CardGameInstance {
 
-    public void startGame(){
+    public void startGame(HashSet<String> cameraCards){
 
         CardSolver Solver = new CardSolver();
 
-        ArrayList<Card> visibleCard = new ArrayList<Card>();
+        // TODO: 6/16/2021 Delete this later(find better solution)
+        ArrayList<String> cameraCards_ = new ArrayList<>(cameraCards);
+        
         ArrayList<String> stringCards = new ArrayList<String>();
+
 
 
 
@@ -24,7 +29,7 @@ public class CardGameInstance {
 
         for (int i = 0; i < stringCards.size() ; i++) {
 
-            String[] words = stringCards.get(i).split(" ");
+            String[] words = cameraCards_.get(i).split(" ");
             String suit = words[0].toUpperCase();
 
 
@@ -36,9 +41,7 @@ public class CardGameInstance {
 
         }
 
-        Solver.solveGame(piles);
-
-
+        Pile[] solver = Solver.solveGame(piles);
     }
 
 

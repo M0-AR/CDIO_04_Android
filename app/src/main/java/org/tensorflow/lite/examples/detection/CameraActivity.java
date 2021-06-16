@@ -93,7 +93,7 @@ public abstract class CameraActivity extends AppCompatActivity
   private TextView threadsTextView;
   protected Button cardMovement;
 
-  protected static Set<String> cardName = new HashSet<>();
+  protected static HashSet<String> cardName = new HashSet<>();
   protected boolean isButtonMovementClicked = false;
 
   @Override
