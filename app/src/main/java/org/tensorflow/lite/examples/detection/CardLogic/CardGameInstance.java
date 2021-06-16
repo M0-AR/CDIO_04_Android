@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class CardGameInstance {
 
-    public void startGame(HashSet<String> cameraCards){
+    public String startGame(HashSet<String> cameraCards){
 
         CardSolver Solver = new CardSolver();
 
@@ -24,12 +24,13 @@ public class CardGameInstance {
 
 
         Pile[] piles = new TableauPile[7];
+        piles[6] = new TableauPile();
 
 
 
 
 
-        for (int i = 0; i < stringCards.size() ; i++) {
+        for (int i = 0; i < 6 ; i++) {
 
             String[] words = cameraCards_.get(i).split(" ");
             String suit = words[0].toUpperCase();
@@ -43,7 +44,7 @@ public class CardGameInstance {
 
         }
 
-       Solver.solveGame(piles);
+       return Solver.solveGame(piles);
     }
 
 

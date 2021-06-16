@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CardSolver {
 
-    String suggestedMoves;
+    String suggestedMoves = "";
 
     public String solveGame(Pile[] rowCard)
     {

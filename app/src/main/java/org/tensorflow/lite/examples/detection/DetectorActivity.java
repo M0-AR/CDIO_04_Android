@@ -38,6 +38,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import org.tensorflow.lite.examples.detection.CardLogic.CardGameInstance;
+import org.tensorflow.lite.examples.detection.CardLogic.CardSolver;
 import org.tensorflow.lite.examples.detection.customview.OverlayView;
 import org.tensorflow.lite.examples.detection.customview.OverlayView.DrawCallback;
 import org.tensorflow.lite.examples.detection.env.BorderedText;
@@ -208,6 +210,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                     }
                                 }
                                 Log.e("CHECK", cardName.toString());
+                                CardGameInstance cardGameInstance = new CardGameInstance();
+                                String instructUser = cardGameInstance.startGame(cardName);
+                                Log.e("Instruct User: ", instructUser);
                             } catch (Exception e) {
                                 Log.e("CHECK", e.toString());
                             }
