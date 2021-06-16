@@ -201,7 +201,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                     Log.e("CHECK", "run: " + result.toString());
                                     Log.e("CHECK", "run: " + result.getTitle());
                                     Log.e("CHECK", "run: " + result.getConfidence());
-                                    if (result.getConfidence() > 0.90){
+                                    if (result.getConfidence() > 0.70){
                                         cardName.add(result.getTitle());
                                         Log.e("CHECK", "X value: " + result.getLocation().centerX());
                                         Log.e("CHECK", "Y value: " + result.getLocation().centerY());

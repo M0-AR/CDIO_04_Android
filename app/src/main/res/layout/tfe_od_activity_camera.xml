@@ -34,7 +34,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context="org.tensorflow.demo.CameraActivity" />
-
+        <Button
+            android:id="@+id/button_detect"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="Card's movement"
+            android:layout_alignParentBottom="true"
+            tools:ignore="NotSibling" />
 
     </RelativeLayout>
 
