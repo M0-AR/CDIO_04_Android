@@ -1,4 +1,6 @@
 package org.tensorflow.lite.examples.detection.CardLogic;
+import android.util.Log;
+
 import org.tensorflow.lite.examples.detection.DetectorActivity;
 
 import java.util.ArrayList;
@@ -41,7 +43,7 @@ public class CardGameInstance {
 
         }
 
-        Pile[] solver = Solver.solveGame(piles);
+       Solver.solveGame(piles);
     }
 
 

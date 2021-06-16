@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 public class CardSolver {
 
+    String suggestedMoves;
 
-    public Pile[] solveGame(Pile[] rowCard)
+    public String solveGame(Pile[] rowCard)
     {
+
+
 
         System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
         for (int i = 0; i < rowCard.length ; i++) {
@@ -28,6 +31,7 @@ public class CardSolver {
 
 
                     if (movingCardFrom == movingCardTo && cardsHaveDifferentColor && notOnTheSameRow){
+                        suggestedMoves = suggestedMoves + "Move "+rowCard[i].getCard(0)+" to "+rowCard[j].getCard(rowCard[j].size()-1)+"\n";
                         for (int l = 0; l < rowCard[i].size();) {
                             rowCard[j].addCard(rowCard[i].getCard(l));
                             rowCard[i].removeCard(l);
@@ -45,7 +49,7 @@ public class CardSolver {
         for (int i = 0; i < rowCard.length ; i++) {
             System.out.println(rowCard[i].getCards().toString());
         }
-        return rowCard;
+        return suggestedMoves;
     }
 
     private void checkIfPlacable(ArrayList A, Card card){
