@@ -33,8 +33,13 @@ import android.util.TypedValue;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.tensorflow.lite.examples.detection.customview.OverlayView;
 import org.tensorflow.lite.examples.detection.customview.OverlayView.DrawCallback;
@@ -64,6 +69,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
     private static final boolean SAVE_PREVIEW_BITMAP = false;
     private static final float TEXT_SIZE_DIP = 10;
+
+    private static Set<String> cardName = new HashSet<>();
+
     OverlayView trackingOverlay;
     private Integer sensorOrientation;
 
@@ -189,7 +197,29 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                         final List<Classifier.Recognition> results = detector.recognizeImage(croppedBitmap);
                         lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
 
-                        Log.e("CHECK", "run: " + results.size());
+                        // Log.e("CHECK", "run: " + results.size());
+
+                        try {
+                            if (results.size() > 0 && results != null) {
+                                for (Classifier.Recognition result : results) {
+                                    Log.e("CHECK", "run: " + result.toString());
+                                    Log.e("CHECK", "run: " + result.getTitle());
+                                    Log.e("CHECK", "run: " + result.getConfidence());
+                                    if (result.getConfidence() > 0.90){
+                                        cardName.add(result.getTitle());
+                                        Log.e("CHECK", "X value: " + result.getLocation().centerX());
+                                        Log.e("CHECK", "Y value: " + result.getLocation().centerY());
+                                    }
+
+
+
+                                }
+                            }
+                            Log.e("CHECK", cardName.toString());
+                        } catch (Exception e) {
+                            Log.e("CHECK", e.toString());
+                        }
+
 
                         cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
                         final Canvas canvas = new Canvas(cropCopyBitmap);
@@ -263,4 +293,11 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     protected void setNumThreads(final int numThreads) {
         runInBackground(() -> detector.setNumThreads(numThreads));
     }
+
+
+    public static Set<String> getCards(){
+        return cardName;
+    }
+
 }
+

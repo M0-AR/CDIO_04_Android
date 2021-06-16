@@ -1,5 +1,8 @@
 package org.tensorflow.lite.examples.detection.CardLogic;
+import org.tensorflow.lite.examples.detection.DetectorActivity;
+
 import java.util.ArrayList;
+import java.util.Set;
 
 
 public class CardGameInstance {
@@ -15,17 +18,6 @@ public class CardGameInstance {
 
         Pile[] piles = new TableauPile[7];
 
-
-
-
-
-        stringCards.add("Hearts 6");
-        stringCards.add("Spades 10");
-        stringCards.add("Hearts 4");
-        stringCards.add("Diamonds 3");
-        stringCards.add("Spades 4");
-        stringCards.add("Diamonds 5");
-        stringCards.add("Hearts 9");
 
 
 
