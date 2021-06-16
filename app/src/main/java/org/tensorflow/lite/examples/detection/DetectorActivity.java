@@ -213,6 +213,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                 CardGameInstance cardGameInstance = new CardGameInstance();
                                 String instructUser = cardGameInstance.startGame(cardName);
                                 Log.e("Instruct User: ", instructUser);
+                                textMovement.setText("");
+                                textMovement.setText(instructUser);
                             } catch (Exception e) {
                                 Log.e("CHECK", e.toString());
                             }

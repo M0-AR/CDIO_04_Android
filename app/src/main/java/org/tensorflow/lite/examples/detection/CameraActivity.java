@@ -91,7 +91,9 @@ public abstract class CameraActivity extends AppCompatActivity
   private ImageView plusImageView, minusImageView;
   private SwitchCompat apiSwitchCompat;
   private TextView threadsTextView;
+
   protected Button cardMovement;
+  protected TextView textMovement;
 
   protected static HashSet<String> cardName = new HashSet<>();
   protected boolean isButtonMovementClicked = false;
@@ -121,8 +123,9 @@ public abstract class CameraActivity extends AppCompatActivity
     gestureLayout = findViewById(R.id.gesture_layout);
     sheetBehavior = BottomSheetBehavior.from(bottomSheetLayout);
     bottomSheetArrowImageView = findViewById(R.id.bottom_sheet_arrow);
-    cardMovement = findViewById(R.id.button_movement);
 
+    cardMovement = findViewById(R.id.button_movement);
+    textMovement = findViewById(R.id.text_movement);
 
 
     ViewTreeObserver vto = gestureLayout.getViewTreeObserver();
