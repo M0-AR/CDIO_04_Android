@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CDIO_04_Android_1.iml" filepath="$PROJECT_DIR$/.idea/modules/CDIO_04_Android_1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CDIO_04_Android_1.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CDIO_04_Android_1.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tensorflow-lite/CDIO_04_Android_1.tensorflow-lite.iml" filepath="$PROJECT_DIR$/.idea/modules/tensorflow-lite/CDIO_04_Android_1.tensorflow-lite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CDIO_04_Android.iml" filepath="$PROJECT_DIR$/.idea/modules/CDIO_04_Android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CDIO_04_Android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CDIO_04_Android.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tensorflow-lite/CDIO_04_Android.tensorflow-lite.iml" filepath="$PROJECT_DIR$/.idea/modules/tensorflow-lite/CDIO_04_Android.tensorflow-lite.iml" />
     </modules>
   </component>
 </project>
