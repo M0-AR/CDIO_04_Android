@@ -6,60 +6,93 @@ public class CardSolver {
 
     String suggestedMoves = "";
 
-    public String solveGame(Pile[] rowCard)
+
+
+    public String solveGame(Pile[] tableauPile, Pile[] foundationPile)
     {
 
+        checkForPlacementInFoundationPile(tableauPile,foundationPile);
+        checkForRegularCardMovement(tableauPile);
 
 
-        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-        for (int i = 0; i < rowCard.length ; i++) {
-            System.out.println(rowCard[i].getCards().toString());
-        }
-        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-
-        for (int i = 0; i < rowCard.length; i++) {
-
-            for (int j = 0; j < rowCard.length; j++) {
-
-
-                if (rowCard[i].size()!=0 && rowCard[j].size() != 0 ){
-
-                    int movingCardFrom=rowCard[i].getCard(0).getRank().getValue();
-                    int movingCardTo=rowCard[j].getCard(rowCard[j].size()-1).getRank().getValue()-1;
-                    boolean cardsHaveDifferentColor = rowCard[i].getCard(0).isRed()!=rowCard[j].getCard(rowCard[j].size()-1).isRed();
-                    boolean notOnTheSameRow = rowCard[i]!=rowCard[j];
-
-
-                    if (movingCardFrom == movingCardTo && cardsHaveDifferentColor && notOnTheSameRow){
-                        suggestedMoves = suggestedMoves + "Move "+rowCard[i].getCard(0)+" to "+rowCard[j].getCard(rowCard[j].size()-1)+"\n";
-                        for (int l = 0; l < rowCard[i].size();) {
-                            rowCard[j].addCard(rowCard[i].getCard(l));
-                            rowCard[i].removeCard(l);
-
-                        }
-                    }
-                }
-
-
-
-
-
-            }
-        }
-        for (int i = 0; i < rowCard.length ; i++) {
-            System.out.println(rowCard[i].getCards().toString());
-        }
         return suggestedMoves;
     }
 
-    private void checkIfPlacable(ArrayList A, Card card){
+    private void checkForPlacementInFoundationPile(Pile[] tableauPile, Pile[] foundationPile) {
 
+        for (int i = 0; i < tableauPile.length; i++) {
 
+            for (int j = 0; j < foundationPile.length; j++) {
 
+                if (tableauPile[i].size() != 0) {
+
+                    if (foundationPile[j].size() != 0) {
+
+                        int valueOfCardOnFoundation = foundationPile[j].getCard(foundationPile[j].size() - 1).getRank().getValue();
+                        int valueOfCurrentCard = tableauPile[i].getCard(tableauPile[i].size() - 1).getRank().getValue();
+                        boolean sameSuit = foundationPile[j].getCard(foundationPile[j].size() - 1).getSuit() == tableauPile[i].getCard(tableauPile[i].size() - 1).getSuit();
+
+                        if (valueOfCardOnFoundation == valueOfCurrentCard - 1 && sameSuit) {
+
+                            suggestedMoves = suggestedMoves + "Move " + tableauPile[i].getCard(tableauPile[i].size() - 1) + " to pile number " + (j + 1) + "\n";
+
+                            foundationPile[j].addCard(tableauPile[i].getCard(tableauPile[i].size() - 1));
+                            tableauPile[i].removeCard(tableauPile[i].size() - 1);
+                        }
+
+                    } else {
+
+                        int valueOfCurrentCard = tableauPile[i].getCard(tableauPile[i].size() - 1).getRank().getValue();
+
+                        if (valueOfCurrentCard == 1) {
+                            suggestedMoves = suggestedMoves + "Move " + tableauPile[i].getCard(tableauPile[i].size() - 1) + " to pile number " + (j + 1) + "\n";
+
+                            foundationPile[j].addCard(tableauPile[i].getCard(tableauPile[i].size() - 1));
+                            tableauPile[i].removeCard(tableauPile[i].size() - 1);
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
+    private void checkForRegularCardMovement(Pile[] tableauPile){
 
+        for (int i = 0; i < tableauPile.length; i++) {
+            for (int j = 0; j < tableauPile.length; j++) {
+
+
+                if (tableauPile[i].size() != 0 && tableauPile[j].size() != 0) {
+
+                    int movingCardFrom = tableauPile[i].getCard(0).getRank().getValue();
+                    int movingCardTo = tableauPile[j].getCard(tableauPile[j].size() - 1).getRank().getValue() - 1;
+                    boolean cardsHaveDifferentColor = tableauPile[i].getCard(0).isRed() != tableauPile[j].getCard(tableauPile[j].size() - 1).isRed();
+                    boolean notOnTheSameRow = tableauPile[i] != tableauPile[j];
+
+
+                    if (movingCardFrom == movingCardTo && cardsHaveDifferentColor && notOnTheSameRow) {
+                        suggestedMoves = suggestedMoves + "Move " + tableauPile[i].getCard(0) + " to " + tableauPile[j].getCard(tableauPile[j].size() - 1) + "\n";
+                        for (int l = 0; l < tableauPile[i].size(); ) {
+                            tableauPile[j].addCard(tableauPile[i].getCard(l));
+                            tableauPile[i].removeCard(l);
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    private void requestNewCard(Pile pile) {
+        showNewCard(pile);
+    }
+
+    private void showNewCard(Pile pile) {
+
+        Card newCard = null;
+        pile.addCard(newCard);
+    }
 
 }
 
