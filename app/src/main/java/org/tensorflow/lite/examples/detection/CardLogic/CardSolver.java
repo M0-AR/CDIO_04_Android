@@ -120,18 +120,17 @@ public class CardSolver {
     }
 
 
-    private void requestNewCard(Pile pile) {
-
-        showNewCard(pile);
-    }
-
-
     private void showNewCard(Pile pile) {
 
         Card newCard = null;
         pile.addCard(newCard);
     }
 
+
+    private void requestNewCard(Pile pile) {
+
+        showNewCard(pile);
+    }
 
 
 }
