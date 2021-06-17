@@ -40,7 +40,7 @@ public class CardGameInstance {
         ArrayList<String> stringCards = new ArrayList<String>();
 
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 1; i++) {
 
             String[] words = cameraCards_.get(i).split(" ");
             String suit = words[0].toUpperCase();
