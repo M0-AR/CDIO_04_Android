@@ -19,7 +19,7 @@ public class Card {
     }
 
     public boolean isRed() {
-        return suit == Suit.HEARTS || suit == Suit.DIAMONDS;
+        return suit == Suit.H || suit == Suit.D;
     }
 
     @Override

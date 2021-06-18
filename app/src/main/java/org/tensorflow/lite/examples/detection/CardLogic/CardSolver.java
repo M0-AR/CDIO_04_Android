@@ -11,8 +11,9 @@ public class CardSolver {
 
 
         checkForPlacementInFoundationPile(tableauPile, foundationPile);
-        checkForRegularCardMovement(tableauPile);
 
+        if (suggestedMoves.isEmpty())
+            checkForRegularCardMovement(tableauPile);
 
         return suggestedMoves;
     }
@@ -103,6 +104,9 @@ public class CardSolver {
                     }
 
                 }
+            }
+            if (!suggestedMoves.isEmpty()) {
+               break;
             }
         }
     }

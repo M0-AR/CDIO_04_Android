@@ -61,7 +61,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     private static final boolean TF_OD_API_IS_QUANTIZED = false;
     private static final String TF_OD_API_MODEL_FILE = "custom_yolov4_fp16.tflite";
 
-    private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/coco.txt";
+    private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/coco01.txt";
 
     private static final DetectorMode MODE = DetectorMode.TF_OD_API;
     private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
@@ -204,9 +204,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                         Log.e("CHECK", "run: " + result.getTitle());
                                         Log.e("CHECK", "run: " + result.getConfidence());
 
-                                            cardName.add(result.getTitle());
-                                            Log.e("CHECK", "X value: " + result.getLocation().centerX());
-                                            Log.e("CHECK", "Y value: " + result.getLocation().centerY());
+                                        cardName.add(result.getTitle());
+
 
                                     }
                                 }
@@ -218,6 +217,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                 textMovement.setText(instructUser);
                             } catch (Exception e) {
                                 Log.e("CHECK", e.toString());
+                                textMovement.setText("");
+                                textMovement.setText(e.toString());
                             }
                         }); // EndOfCardMovement
 

@@ -2,7 +2,7 @@ package org.tensorflow.lite.examples.detection.CardLogic;
 
 public enum  Suit {
 
-    HEARTS("Hearts"), SPADES("Spades"), DIAMONDS("Diamonds"), CLUBS("Clubs");
+    H("Hearts"), S("Spades"), D("Diamonds"), C("Clubs");
 
     private String suit;
 

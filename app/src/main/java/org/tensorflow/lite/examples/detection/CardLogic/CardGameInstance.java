@@ -38,11 +38,13 @@ public class CardGameInstance {
 
         for (int i = 0; i < cameraCards_.size() ; i++) {
 
-            String[] words = cameraCards_.get(i).split(" ");
-            String suit = words[0].toUpperCase();
+            String suit =  String.valueOf(cameraCards_.get(i).charAt(0));
+            String rank = (cameraCards_.get(i).length() == 2) ? String.valueOf(cameraCards_.get(i).charAt(1)) :
+                    String.valueOf(cameraCards_.get(i).charAt(1)) + cameraCards_.get(i).charAt(2);
 
 
-            Card cardIndex = new Card(Suit.valueOf(suit),Rank.setRank(words[1]));
+
+            Card cardIndex = new Card(Suit.valueOf(suit),Rank.setRank(rank));
 
             tableauPile[i] = new TableauPile();
             tableauPile[i].addCard(cardIndex);
