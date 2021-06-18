@@ -33,13 +33,12 @@ import android.util.TypedValue;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import org.tensorflow.lite.examples.detection.CardLogic.CardGameInstance;
-import org.tensorflow.lite.examples.detection.CardLogic.CardSolver;
 import org.tensorflow.lite.examples.detection.customview.OverlayView;
 import org.tensorflow.lite.examples.detection.customview.OverlayView.DrawCallback;
 import org.tensorflow.lite.examples.detection.env.BorderedText;
@@ -204,23 +203,34 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                         Log.e("CHECK", "run: " + result.getTitle());
                                         Log.e("CHECK", "run: " + result.getConfidence());
 
-                                        cardName.add(result.getTitle());
-
-
+                                        preCardName.add(result.getTitle());
                                     }
                                 }
-                                Log.e("CHECK", cardName.toString());
+                                newCardName.addAll(preCardName);
+                                Log.e("CHECK", preCardName.toString());
                                 CardGameInstance cardGameInstance = new CardGameInstance();
-                                String instructUser = cardGameInstance.startGame(cardName);
-                                Log.e("Instruct User: ", instructUser);
-                                textMovement.setText("");
-                                textMovement.setText(instructUser);
+                                ArrayList<String> instructUser = cardGameInstance.startGame(preCardName, null);
+
+
+                                for (int i = 0; i < instructUser.size(); i++) {
+                                    Log.e("Instruct User: ", instructUser.get(i));
+                                    textMovement.setText("");
+                                    textMovement.setText(instructUser.get(i));
+                                    instructUser.remove(i);
+                                    while (preCardName.size() == newCardName.size()) {
+                                        System.out.println("Find solution: Make the user detect new card then move to the next solution"); // todo
+                                    }
+                                }
+
                             } catch (Exception e) {
                                 Log.e("CHECK", e.toString());
                                 textMovement.setText("");
-                                textMovement.setText(e.toString());
+                                textMovement.setText("Please make sure that you match the cards with the detection");
+                                preCardName = new HashSet<>();
+                                newCardName = new HashSet<>();
                             }
                         }); // EndOfCardMovement
+
 
 
 

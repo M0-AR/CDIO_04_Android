@@ -4,16 +4,15 @@ import java.util.ArrayList;
 
 public class CardSolver {
 
-    private String suggestedMoves = "";
+    private ArrayList<String> suggestedMoves = new ArrayList<>();
 
 
-    public String solveGame(Pile[] tableauPile, Pile[] foundationPile) {
+    public ArrayList<String> solveGame(Pile[] tableauPile, Pile[] foundationPile) {
 
 
         checkForPlacementInFoundationPile(tableauPile, foundationPile);
 
-        if (suggestedMoves.isEmpty())
-            checkForRegularCardMovement(tableauPile);
+        checkForRegularCardMovement(tableauPile);
 
         return suggestedMoves;
     }
@@ -70,7 +69,7 @@ public class CardSolver {
 
         int aceCard = tableauPile.size() -1 ;
 
-        suggestedMoves = suggestedMoves + "Move " + tableauPile.getCard(tableauPile.size() - 1) + " to pile number " + (pileNumber + 1) + "\n";
+        suggestedMoves.add("Move " + tableauPile.getCard(tableauPile.size() - 1) + " to pile number " + (pileNumber + 1));
         foundationPile.addCard(tableauPile.getCard(aceCard));
         tableauPile.removeCard(aceCard);
 
@@ -105,9 +104,6 @@ public class CardSolver {
 
                 }
             }
-            if (!suggestedMoves.isEmpty()) {
-               break;
-            }
         }
     }
 
@@ -115,7 +111,7 @@ public class CardSolver {
     private void moveCardToOtherPile(Pile movingCardRow, Pile stationaryCardRow, int topCardPos, int buttomCardPos) {
 
 
-        suggestedMoves = suggestedMoves + "Move " + movingCardRow.getCard(topCardPos) + " to " + stationaryCardRow.getCard(buttomCardPos) + "\n";
+        suggestedMoves.add("Move " + movingCardRow.getCard(topCardPos) + " to " + stationaryCardRow.getCard(buttomCardPos));
         for (int l = 0; l < movingCardRow.size(); ) {
             stationaryCardRow.addCard(movingCardRow.getCard(l));
             movingCardRow.removeCard(l);

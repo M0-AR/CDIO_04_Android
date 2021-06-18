@@ -53,6 +53,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -95,8 +96,8 @@ public abstract class CameraActivity extends AppCompatActivity
   protected Button cardMovement;
   protected TextView textMovement;
 
-  protected static HashSet<String> cardName = new HashSet<>();
-  protected boolean isButtonMovementClicked = false;
+  protected static HashSet<String> preCardName = new HashSet<>();
+  protected static HashSet<String> newCardName = new HashSet<>();
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
