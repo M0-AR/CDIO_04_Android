@@ -16,15 +16,12 @@ public class CardGameInstance {
     private CardSolver solver;
 
     public CardGameInstance() {
-        tableauPile = new TableauPile[1];
+        tableauPile = new TableauPile[7];
         foundationPile = new FoundationPile[4];
         solver = new CardSolver();
     }
 
-
-
     public String startGame(HashSet<String> cameraCards){
-
 
         for (int i = 0; i < foundationPile.length ; i++) {
             foundationPile[i] = new FoundationPile();
@@ -39,13 +36,7 @@ public class CardGameInstance {
         ArrayList<String> stringCards = new ArrayList<String>();
 
 
-
-
-
-
-
-
-        for (int i = 0; i < 1 ; i++) {
+        for (int i = 0; i < cameraCards_.size() ; i++) {
 
             String[] words = cameraCards_.get(i).split(" ");
             String suit = words[0].toUpperCase();
@@ -55,8 +46,6 @@ public class CardGameInstance {
 
             tableauPile[i] = new TableauPile();
             tableauPile[i].addCard(cardIndex);
-
-
         }
 
        return Solver.solveGame(tableauPile,foundationPile);

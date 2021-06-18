@@ -24,17 +24,18 @@ public class CardSolver {
 
             for (int j = 0; j < foundationPile.length; j++) {
 
-                if (tableauPile[i].size() != 0) {
+                if (tableauPile[i] != null)
+                    if (tableauPile[i].size() != 0) {
 
-                    if (foundationPile[j].size() != 0) {
+                        if (foundationPile[j].size() != 0) {
 
-                        checkForRegularCardPlacementOnFoundation(tableauPile[i], foundationPile[j], j);
+                            checkForRegularCardPlacementOnFoundation(tableauPile[i], foundationPile[j], j);
 
-                    } else {
+                        } else {
 
-                        checkForAcePlacementOnFoundation(tableauPile[i], foundationPile[j], j);
+                            checkForAcePlacementOnFoundation(tableauPile[i], foundationPile[j], j);
 
-                    }
+                        }
                 }
             }
         }
