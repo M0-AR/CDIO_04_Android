@@ -15,23 +15,32 @@ public class CardGameInstance {
     private final Pile[] foundationPile;
     private CardSolver solver;
     private boolean firstCall = true;
+    private static CardGameInstance cardGameInstance;
 
-    public CardGameInstance() {
+    private CardGameInstance() {
         tableauPile = new TableauPile[7];
         foundationPile = new FoundationPile[4];
         solver = new CardSolver();
     }
 
-    public ArrayList<String> startGame(HashSet<String> cameraCards, String oneCard){
+    public static CardGameInstance getInstance() {
+        if (cardGameInstance == null)
+            cardGameInstance = new CardGameInstance();
 
-        for (int i = 0; i < foundationPile.length ; i++) {
-            foundationPile[i] = new FoundationPile();
-        }
+        return cardGameInstance;
+    }
+
+    public ArrayList<String> startGame(HashSet<String> cameraCards, String oneCard){
 
         // TODO: 6/16/2021 Delete this later(find better solution)
         ArrayList<String> cameraCards_ = new ArrayList<>(cameraCards);
 
         if (firstCall) {
+
+            for (int i = 0; i < foundationPile.length ; i++) {
+                foundationPile[i] = new FoundationPile();
+            }
+
             for (int i = 0; i < cameraCards_.size() ; i++) {
 
                 String suit =  String.valueOf(cameraCards_.get(i).charAt(0));
@@ -46,13 +55,10 @@ public class CardGameInstance {
                 tableauPile[i].addCard(cardIndex);
             }
             firstCall = false;
+            return solver.solveGame(tableauPile,foundationPile);
         } else {
-
+            return solver.solveGame(tableauPile,foundationPile);
         }
-
-
-
-       return solver.solveGame(tableauPile,foundationPile);
     }
 
 
