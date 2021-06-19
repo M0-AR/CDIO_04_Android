@@ -98,6 +98,11 @@ public abstract class CameraActivity extends AppCompatActivity
 
   protected static HashSet<String> preCardName = new HashSet<>();
   protected static HashSet<String> newCardName = new HashSet<>();
+  protected static ArrayList<String> instructUserNew = null;
+
+  protected static int indexOfInstruction = 0;
+  protected static int numberOfInstruction = 0;
+  protected boolean firstTime = true;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {

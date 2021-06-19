@@ -185,6 +185,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             ImageUtils.saveBitmap(croppedBitmap);
         }
 
+//        while (preCardName.size() == newCardName.size()) {
+//            System.out.println("Find solution: Make the user detect new card then move to the next solution"); // todo
+//        }
+
         runInBackground(
                 new Runnable() {
                     @Override
@@ -194,40 +198,71 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                         final List<Classifier.Recognition> results = detector.recognizeImage(croppedBitmap);
                         lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
 
+
                         // Log.e("CHECK", "run: " + results.size());
                         cardMovement.setOnClickListener(v -> {
+                            System.out.println("");
                             try {
-                                if (results.size() > 0) {
-                                    for (Classifier.Recognition result : results) {
-                                        Log.e("CHECK", "run: " + result.toString());
-                                        Log.e("CHECK", "run: " + result.getTitle());
-                                        Log.e("CHECK", "run: " + result.getConfidence());
+                                ArrayList<String> instructUser;
+                                if (firstTime) {
+                                    if (results.size() > 0) {
+                                        for (Classifier.Recognition result : results) {
+                                            Log.e("CHECK", "run: " + result.toString());
+                                            Log.e("CHECK", "run: " + result.getTitle());
+                                            Log.e("CHECK", "run: " + result.getConfidence());
 
-                                        preCardName.add(result.getTitle());
+                                            preCardName.add(result.getTitle());
+                                        }
                                     }
+                                    firstTime = false;
                                 }
-                                newCardName.addAll(preCardName);
-                                Log.e("CHECK", preCardName.toString());
-                                CardGameInstance cardGameInstance = new CardGameInstance();
-                                ArrayList<String> instructUser = cardGameInstance.startGame(preCardName, null);
 
-
-                                for (int i = 0; i < instructUser.size(); i++) {
-                                    Log.e("Instruct User: ", instructUser.get(i));
+                                if (numberOfInstruction > 0) {
+                                    Log.e("Instruct User: ", instructUserNew.get(indexOfInstruction));
                                     textMovement.setText("");
-                                    textMovement.setText(instructUser.get(i));
-                                    instructUser.remove(i);
-                                    while (preCardName.size() == newCardName.size()) {
-                                        System.out.println("Find solution: Make the user detect new card then move to the next solution"); // todo
+                                    textMovement.setText(instructUserNew.get(indexOfInstruction) + "\n" +
+                                            "Then, please flip the card or move the king to an empty space.");
+                                    instructUserNew.remove(indexOfInstruction);
+                                    indexOfInstruction++;
+                                    numberOfInstruction--;
+                                    if (results.size() > 0) {
+                                        while (preCardName.size() == newCardName.size())
+                                            for (Classifier.Recognition result : results) {
+                                                Log.e("CHECK", "run: " + result.toString());
+                                                Log.e("CHECK", "run: " + result.getTitle());
+                                                Log.e("CHECK", "run: " + result.getConfidence());
+
+                                                preCardName.add(result.getTitle());
+                                            }
                                     }
+                                } else {
+                                    newCardName.addAll(preCardName);
+                                    Log.e("CHECK", preCardName.toString());
+                                    CardGameInstance cardGameInstance = CardGameInstance.getInstance();
+                                    instructUser = cardGameInstance.startGame(preCardName, null);
+                                    instructUserNew = new ArrayList<>(instructUser);
+                                    numberOfInstruction = instructUserNew.size();
+                                    indexOfInstruction = 0;
+
+
+                                    Log.e("Instruct User: ", instructUserNew.get(indexOfInstruction));
+                                    textMovement.setText("");
+                                    textMovement.setText(instructUserNew.get(indexOfInstruction) + "\n" +
+                                            "Then, please flip the card or move the king to an empty space.");
+                                    instructUserNew.remove(indexOfInstruction);
+                                    indexOfInstruction++;
+                                    numberOfInstruction--;
                                 }
+
+
+
 
                             } catch (Exception e) {
                                 Log.e("CHECK", e.toString());
                                 textMovement.setText("");
                                 textMovement.setText("Please make sure that you match the cards with the detection");
-                                preCardName = new HashSet<>();
-                                newCardName = new HashSet<>();
+                                //preCardName = new HashSet<>();
+                               // newCardName = new HashSet<>();
                             }
                         }); // EndOfCardMovement
 
