@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 public class CardSolver {
 
-    private ArrayList<String> suggestedMoves = new ArrayList<>();
+    private ArrayList<String> suggestedMoves;
 
 
     public ArrayList<String> solveGame(Pile[] tableauPile, Pile[] foundationPile) {
 
+        suggestedMoves = new ArrayList<>();
 
         checkForPlacementInFoundationPile(tableauPile, foundationPile);
 
@@ -41,17 +42,6 @@ public class CardSolver {
         }
     }
 
-
-    private void checkForAcePlacementOnFoundation(Pile tableauPile, Pile foundationPile, int pileNumber) {
-
-        int valueOfCurrentCard = tableauPile.getCard(tableauPile.size() - 1).getRank().getValue();
-        if (valueOfCurrentCard == 1) {
-
-            moveCardToFoundation(tableauPile,foundationPile,pileNumber);
-        }
-    }
-
-
     private void checkForRegularCardPlacementOnFoundation(Pile tableauPile, Pile foundationPile, int pileNumber){
 
         int valueOfCardOnFoundation = foundationPile.getCard(foundationPile.size() - 1).getRank().getValue();
@@ -64,6 +54,14 @@ public class CardSolver {
         }
     }
 
+    private void checkForAcePlacementOnFoundation(Pile tableauPile, Pile foundationPile, int pileNumber) {
+
+        int valueOfCurrentCard = tableauPile.getCard(tableauPile.size() - 1).getRank().getValue();
+        if (valueOfCurrentCard == 1) {
+
+            moveCardToFoundation(tableauPile,foundationPile,pileNumber);
+        }
+    }
 
     private void moveCardToFoundation(Pile tableauPile, Pile foundationPile, int pileNumber){
 
@@ -110,30 +108,86 @@ public class CardSolver {
 
     private void moveCardToOtherPile(Pile movingCardRow, Pile stationaryCardRow, int topCardPos, int buttomCardPos) {
 
-
         suggestedMoves.add("Move " + movingCardRow.getCard(topCardPos) + " to " + stationaryCardRow.getCard(buttomCardPos));
         for (int l = 0; l < movingCardRow.size(); ) {
             stationaryCardRow.addCard(movingCardRow.getCard(l));
             movingCardRow.removeCard(l);
         }
 
-
     }
 
 
-    private void showNewCard(Pile pile) {
 
-        Card newCard = null;
-        pile.addCard(newCard);
+    public ArrayList<String> solveCardFromDeck(Pile[] tableauPile, Pile[] foundationPile, Card card) {
+        suggestedMoves = new ArrayList<>();
+
+        checkForPlacementInFoundationPile(card, foundationPile);
+
+        checkForRegularCardMovement(tableauPile, card);
+
+        return suggestedMoves;
+    }
+
+    private void checkForPlacementInFoundationPile(Card card, Pile[] foundationPile) {
+        for (int i = 0; i < foundationPile.length; i++) {
+            if (foundationPile[i].size() != 0)
+                checkForRegularCardPlacementOnFoundation(card, foundationPile[i], i);
+            else
+                checkForAcePlacementOnFoundation(card, foundationPile[i], i);
+        }
+    }
+
+    private void checkForAcePlacementOnFoundation(Card card, Pile foundationPile, int pileNumber) {
+        int valueOfCurrentCard = card.getRank().getValue();
+        if (valueOfCurrentCard == 1) {
+            moveCardToFoundation(card,foundationPile,pileNumber);
+        }
+    }
+
+    private void checkForRegularCardPlacementOnFoundation(Card card, Pile foundationPile, int pileNumber){
+        int valueOfCurrentCard = card.getRank().getValue();
+        int valueOfCardOnFoundation = foundationPile.getCard(foundationPile.size() - 1).getRank().getValue();
+        boolean sameSuit = foundationPile.getCard(foundationPile.size() - 1).getSuit() == card.getSuit();
+
+        if (valueOfCardOnFoundation == valueOfCurrentCard - 1 && sameSuit) {
+            moveCardToFoundation(card,foundationPile,pileNumber);
+        }
+    }
+
+    private void moveCardToFoundation(Card card, Pile foundationPile, int pileNumber){
+        suggestedMoves.add("Move " + card + " to pile number " + (pileNumber + 1));
+        foundationPile.addCard(card);
     }
 
 
-    private void requestNewCard(Pile pile) {
+    private void checkForRegularCardMovement(Pile[] tableauPile, Card card) {
+        for (int i = 0; i < tableauPile.length; i++) {
 
-        showNewCard(pile);
+            Pile movingCardRow = tableauPile[i];
+
+            if (movingCardRow.size() != 0) {
+
+                int topCardPos = 0;
+
+                int movingCardFrom = card.getRank().getValue();
+                int movingCardTo = movingCardRow.getCard(topCardPos).getRank().getValue() - 1;
+
+                boolean cardsHaveDifferentColor = movingCardRow.getCard(topCardPos).isRed() != card.isRed();
+
+                if (movingCardFrom == movingCardTo && cardsHaveDifferentColor) {
+
+                    moveCardToOtherPile(card, tableauPile[i],topCardPos);
+
+                }
+            }
+        }
     }
 
 
+    private void moveCardToOtherPile(Card card, Pile movingCardRow, int topCardPos) {
+        suggestedMoves.add("Move " + card + " to " + movingCardRow.getCard(topCardPos));
+        movingCardRow.addCard(card);
+    }
 }
 
 

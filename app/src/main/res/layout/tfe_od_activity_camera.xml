@@ -46,7 +46,7 @@
             android:id="@+id/button_movement"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:text="Card's movement"
+            android:text="Card's next move"
             android:layout_alignParentBottom="true"
             tools:ignore="NotSibling" />
 

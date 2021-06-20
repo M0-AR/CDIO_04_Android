@@ -34,7 +34,6 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -219,7 +218,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                             Log.e("CHECK", "run: " + result.getTitle());
                                             Log.e("CHECK", "run: " + result.getConfidence());
 
-                                            preCardName.add(result.getTitle());
+                                            newCardName.add(result.getTitle());
                                         }
                                     }
                                 } else {
@@ -229,24 +228,44 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                             Log.e("CHECK", "run: " + result.getTitle());
                                             Log.e("CHECK", "run: " + result.getConfidence());
 
-                                            preCardName.add(result.getTitle());
+                                            newCardName.add(result.getTitle());
                                         }
                                     }
-                                    newCardName.addAll(preCardName);
-                                    Log.e("CHECK", preCardName.toString());
+
+                                    newCardName.removeAll(preCardName);
+                                    preCardName.addAll(newCardName);
+
+                                    Log.e("CHECK", newCardName.toString());
+
                                     CardGameInstance cardGameInstance = CardGameInstance.getInstance();
-                                    instructUser = cardGameInstance.startGame(preCardName, null);
-                                    instructUserNew = new ArrayList<>(instructUser);
-                                    numberOfInstruction = instructUserNew.size();
-                                    indexOfInstruction = 0;
+
+                                    char[] cardFromDeck = newCardName.toString().toCharArray();
+                                    String cardFromDeck_ = String.valueOf(cardFromDeck[1]) + cardFromDeck[2];
+
+                                    instructUser = cardGameInstance.startGame(newCardName);
+
+                                    if (instructUser.size() == 0) {
+                                        Log.e("Instruct User: ", "Please, take a card from deck of cards");
+                                        textMovement.setText("");
+                                        textMovement.setText("Please, take a card from deck of cards.");
+                                        if (preCardName.size() > 7) {
+                                            preCardName.remove(cardFromDeck_);
+                                            newCardName.remove(cardFromDeck_);
+                                        }
+                                    } else {
+                                        instructUserNew = new ArrayList<>(instructUser);
+                                        numberOfInstruction = instructUserNew.size();
+                                        indexOfInstruction = 0;
 
 
-                                    Log.e("Instruct User: ", instructUserNew.get(indexOfInstruction));
-                                    textMovement.setText("");
-                                    textMovement.setText(instructUserNew.get(indexOfInstruction) + "\n" +
-                                            "Then, please flip the card or move the king to an empty space.");
-                                    indexOfInstruction++;
-                                    numberOfInstruction--;
+                                        Log.e("Instruct User: ", instructUserNew.get(indexOfInstruction));
+                                        textMovement.setText("");
+                                        textMovement.setText(instructUserNew.get(indexOfInstruction) + "\n" +
+                                                "Then, please flip the card, take a card from deck of cards, or move the king to an empty space.");
+
+                                        indexOfInstruction++;
+                                        numberOfInstruction--;
+                                    }
                                 }
                             } catch (Exception e) {
                                 Log.e("CHECK", e.toString());

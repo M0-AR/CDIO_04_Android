@@ -96,8 +96,8 @@ public abstract class CameraActivity extends AppCompatActivity
   protected Button cardMovement;
   protected TextView textMovement;
 
-  protected static HashSet<String> preCardName = new HashSet<>();
   protected static HashSet<String> newCardName = new HashSet<>();
+  protected static HashSet<String> preCardName = new HashSet<>();
   protected static ArrayList<String> instructUserNew = null;
 
   protected static int indexOfInstruction = 0;
