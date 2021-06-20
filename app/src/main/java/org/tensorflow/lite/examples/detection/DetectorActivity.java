@@ -201,10 +201,18 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                         // Log.e("CHECK", "run: " + results.size());
                         cardMovement.setOnClickListener(v -> {
-                            System.out.println("");
                             try {
                                 ArrayList<String> instructUser;
-                                if (firstTime) {
+                                if (numberOfInstruction > 0) {
+                                    Log.e("Instruct User: ", instructUserNew.get(indexOfInstruction));
+                                    textMovement.setText("");
+                                    textMovement.setText(instructUserNew.get(indexOfInstruction) + "\n" +
+                                            "Then, please flip the card or move the king to an empty space.");
+                                    indexOfInstruction++;
+                                    numberOfInstruction--;
+                                    if (numberOfInstruction == 0) {
+                                        indexOfInstruction = 0;
+                                    }
                                     if (results.size() > 0) {
                                         for (Classifier.Recognition result : results) {
                                             Log.e("CHECK", "run: " + result.toString());
@@ -214,28 +222,16 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                             preCardName.add(result.getTitle());
                                         }
                                     }
-                                    firstTime = false;
-                                }
-
-                                if (numberOfInstruction > 0) {
-                                    Log.e("Instruct User: ", instructUserNew.get(indexOfInstruction));
-                                    textMovement.setText("");
-                                    textMovement.setText(instructUserNew.get(indexOfInstruction) + "\n" +
-                                            "Then, please flip the card or move the king to an empty space.");
-                                    instructUserNew.remove(indexOfInstruction);
-                                    indexOfInstruction++;
-                                    numberOfInstruction--;
-                                    if (results.size() > 0) {
-                                        while (preCardName.size() == newCardName.size())
-                                            for (Classifier.Recognition result : results) {
-                                                Log.e("CHECK", "run: " + result.toString());
-                                                Log.e("CHECK", "run: " + result.getTitle());
-                                                Log.e("CHECK", "run: " + result.getConfidence());
-
-                                                preCardName.add(result.getTitle());
-                                            }
-                                    }
                                 } else {
+                                    if (results.size() > 0) {
+                                        for (Classifier.Recognition result : results) {
+                                            Log.e("CHECK", "run: " + result.toString());
+                                            Log.e("CHECK", "run: " + result.getTitle());
+                                            Log.e("CHECK", "run: " + result.getConfidence());
+
+                                            preCardName.add(result.getTitle());
+                                        }
+                                    }
                                     newCardName.addAll(preCardName);
                                     Log.e("CHECK", preCardName.toString());
                                     CardGameInstance cardGameInstance = CardGameInstance.getInstance();
@@ -249,14 +245,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                     textMovement.setText("");
                                     textMovement.setText(instructUserNew.get(indexOfInstruction) + "\n" +
                                             "Then, please flip the card or move the king to an empty space.");
-                                    instructUserNew.remove(indexOfInstruction);
                                     indexOfInstruction++;
                                     numberOfInstruction--;
                                 }
-
-
-
-
                             } catch (Exception e) {
                                 Log.e("CHECK", e.toString());
                                 textMovement.setText("");
