@@ -78,7 +78,7 @@ public class CardGameInstance {
                 }
             }
 
-            if (isAllColumnsAreFull) {
+            if (isAllColumnsAreFull && card != null) {
                 return solver.solveCardFromDeck(tableauPile, foundationPile, card);
             }
 

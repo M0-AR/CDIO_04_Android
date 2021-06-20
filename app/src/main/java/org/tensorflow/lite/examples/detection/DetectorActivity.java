@@ -239,8 +239,12 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                                     CardGameInstance cardGameInstance = CardGameInstance.getInstance();
 
-                                    char[] cardFromDeck = newCardName.toString().toCharArray();
-                                    String cardFromDeck_ = String.valueOf(cardFromDeck[1]) + cardFromDeck[2];
+                                    String cardFromDeck_ = null;
+                                    if (!newCardName.isEmpty()) {
+                                        char[] cardFromDeck = newCardName.toString().toCharArray();
+                                        cardFromDeck_ = String.valueOf(cardFromDeck[1]) + cardFromDeck[2];
+                                    }
+
 
                                     instructUser = cardGameInstance.startGame(newCardName);
 
