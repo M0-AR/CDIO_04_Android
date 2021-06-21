@@ -251,7 +251,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                     if (instructUser.size() == 0) {
                                         Log.e("Instruct User: ", "Please, take a card from deck of cards");
                                         textMovement.setText("");
-                                        textMovement.setText("Please, take a card from deck of cards.");
+                                        textMovement.setText("Please, withdraw a card from deck of cards.");
                                         if (preCardName.size() > 7) {
                                             preCardName.remove(cardFromDeck_);
                                             newCardName.remove(cardFromDeck_);
@@ -264,8 +264,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                                         Log.e("Instruct User: ", instructUserNew.get(indexOfInstruction));
                                         textMovement.setText("");
-                                        textMovement.setText(instructUserNew.get(indexOfInstruction) + "\n" +
-                                                "Then, please flip the card, take a card from deck of cards, or move the king to an empty space.");
+//                                        textMovement.setText(instructUserNew.get(indexOfInstruction) + "\n" +
+//                                                "Then, please flip the card, take a card from deck of cards, or move the king to an empty space.");
+                                        textMovement.setText(instructUserNew.get(indexOfInstruction) + "\n\n" +
+                                                "Then, please flip the card.");
 
                                         indexOfInstruction++;
                                         numberOfInstruction--;
