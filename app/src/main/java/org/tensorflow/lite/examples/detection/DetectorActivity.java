@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.tensorflow.lite.examples.detection.CardLogic.CardGameInstance;
+import org.tensorflow.lite.examples.detection.CardLogic.SolitaireGame;
 import org.tensorflow.lite.examples.detection.customview.OverlayView;
 import org.tensorflow.lite.examples.detection.customview.OverlayView.DrawCallback;
 import org.tensorflow.lite.examples.detection.env.BorderedText;
@@ -237,7 +237,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                                     Log.e("CHECK", newCardName.toString());
 
-                                    CardGameInstance cardGameInstance = CardGameInstance.getInstance();
+                                    SolitaireGame cardGameInstance = SolitaireGame.getInstance();
 
                                     String cardFromDeck_ = null;
                                     if (!newCardName.isEmpty()) {

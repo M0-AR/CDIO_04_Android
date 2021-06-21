@@ -1,31 +1,26 @@
 package org.tensorflow.lite.examples.detection.CardLogic;
-import android.util.Log;
-
-import org.tensorflow.lite.examples.detection.DetectorActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
 
-public class CardGameInstance {
+public class SolitaireGame {
 
     private final Pile[] tableauPile;
     private final Pile[] foundationPile;
-    private CardSolver solver;
+    private SolitaireSolver solver;
     private boolean firstCall = true;
-    private static CardGameInstance cardGameInstance;
+    private static SolitaireGame cardGameInstance;
 
-    private CardGameInstance() {
+    private SolitaireGame() {
         tableauPile = new TableauPile[7];
         foundationPile = new FoundationPile[4];
-        solver = new CardSolver();
+        solver = new SolitaireSolver();
     }
 
-    public static CardGameInstance getInstance() {
+    public static SolitaireGame getInstance() {
         if (cardGameInstance == null)
-            cardGameInstance = new CardGameInstance();
+            cardGameInstance = new SolitaireGame();
 
         return cardGameInstance;
     }

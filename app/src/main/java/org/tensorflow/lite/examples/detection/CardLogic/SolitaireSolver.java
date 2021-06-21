@@ -2,7 +2,7 @@ package org.tensorflow.lite.examples.detection.CardLogic;
 
 import java.util.ArrayList;
 
-public class CardSolver {
+public class SolitaireSolver {
 
     private ArrayList<String> suggestedMoves;
 
