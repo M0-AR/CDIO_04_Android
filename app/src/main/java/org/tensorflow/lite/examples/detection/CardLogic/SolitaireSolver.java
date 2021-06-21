@@ -7,7 +7,7 @@ public class SolitaireSolver {
     private ArrayList<String> suggestedMoves;
 
 
-    public ArrayList<String> solveGame(Pile[] tableauPile, Pile[] foundationPile) {
+    public ArrayList<String> findNextCardMovement(Pile[] tableauPile, Pile[] foundationPile) {
 
         suggestedMoves = new ArrayList<>();
 

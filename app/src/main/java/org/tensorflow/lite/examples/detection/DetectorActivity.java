@@ -246,7 +246,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                     }
 
 
-                                    instructUser = cardGameInstance.startGame(newCardName);
+                                    instructUser = cardGameInstance.findNextCardMovement(newCardName);
 
                                     if (instructUser.size() == 0) {
                                         Log.e("Instruct User: ", "Please, take a card from deck of cards");

@@ -25,7 +25,7 @@ public class SolitaireGame {
         return cardGameInstance;
     }
 
-    public ArrayList<String> startGame(HashSet<String> cameraCards){
+    public ArrayList<String> findNextCardMovement(HashSet<String> cameraCards){
 
         ArrayList<String> cameraCards_ = new ArrayList<>(cameraCards);
 
@@ -50,7 +50,7 @@ public class SolitaireGame {
             }
             firstCall = false;
 
-            return solver.solveGame(tableauPile,foundationPile);
+            return solver.findNextCardMovement(tableauPile,foundationPile);
         }
         else {
             boolean isAllColumnsAreFull = true;
@@ -77,7 +77,7 @@ public class SolitaireGame {
                 return solver.solveCardFromDeck(tableauPile, foundationPile, card);
             }
 
-            return solver.solveGame(tableauPile,foundationPile);
+            return solver.findNextCardMovement(tableauPile,foundationPile);
         }
     }
 }
