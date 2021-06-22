@@ -17,7 +17,9 @@
         app:layout_constraintHorizontal_bias="0.655"
         app:layout_constraintStart_toEndOf="@+id/detectButton"
         app:layout_constraintTop_toTopOf="@+id/detectButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:background="@color/tfe_color_primary"
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/detectButton"
@@ -25,11 +27,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginBottom="126dp"
-        android:text="Detect"
+        android:text="Rules"
+        android:background="@color/tfe_color_primary"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        android:visibility="invisible"/>
+        />
 
     <ImageView
         android:id="@+id/imageView"

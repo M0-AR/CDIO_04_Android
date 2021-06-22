@@ -48,7 +48,8 @@
             android:layout_height="100dp"
             android:text="Card's next move"
             android:layout_alignParentBottom="true"
-            tools:ignore="NotSibling" />
+            tools:ignore="NotSibling"
+            android:background="@color/tfe_color_primary"/>
 
     </RelativeLayout>
 

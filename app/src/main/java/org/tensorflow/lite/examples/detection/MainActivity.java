@@ -2,6 +2,8 @@ package org.tensorflow.lite.examples.detection;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,8 +17,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.tensorflow.lite.examples.detection.customview.OverlayView;
@@ -47,36 +51,34 @@ public class MainActivity extends AppCompatActivity {
 
         cameraButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DetectorActivity.class)));
         snapShotButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SnapShotActivity.class)));
+        detectButton.setOnClickListener(v -> showDialog(this, "1- The cards' place should be set up same as in the image above.\n\n" +
+                                                                            "2- In the first round all 7 cards should be detected right with each other, then click on CARD'S NEXT MOVE button.\n\n" +
+                                                                            "3- When CARD'S NEXT MOVE button is being clicked, you will get a message instruction what the next movement should be.\n\n" +
+                                                                            "4- Every new card, after the first 7 cards being detected, need to be detected right, then click on CARD'S NEXT MOVE button.\n"));
 
-        detectButton.setOnClickListener(v -> {
-            Handler handler = new Handler();
-
-            new Thread(() -> {
-                final List<Classifier.Recognition> results = detector.recognizeImage(cropBitmap);
-                try {
-                    if (results.size() > 0) {
-                        for (Classifier.Recognition result : results) {
-                            Log.e("CHECK", "run: " + result.toString());
-                            Log.e("CHECK", "run: " + result.getTitle());
-                        }
-                    }
-                } catch (Exception e) {
-                }
-                handler.post(() -> handleResult(cropBitmap, results));
-            }).start();
-
-        });
-
-       // this.sourceBitmap = Utils.getBitmapFromAsset(MainActivity.this, "test.jpg");
         this.sourceBitmap = Utils.getBitmapFromAsset(MainActivity.this, "test01.jpg");
 
-
-//        this.cropBitmap = Utils.processBitmap(sourceBitmap, TF_OD_API_INPUT_SIZE);
         this.cropBitmap = Utils.processBitmap(sourceBitmap, TF_OD_API_INPUT_SIZE);
 
         this.imageView.setImageBitmap(cropBitmap);
 
         initBox();
+    }
+
+    public void showDialog(Activity activity, String msg){
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.game_rules);
+
+        TextView text = (TextView) dialog.findViewById(R.id.text_dialog);
+        text.setText(msg);
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.btn_dialog);
+        dialogButton.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+
     }
 
     private static final Logger LOGGER = new Logger();
