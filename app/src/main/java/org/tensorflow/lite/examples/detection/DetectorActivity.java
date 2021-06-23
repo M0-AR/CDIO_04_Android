@@ -184,9 +184,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             ImageUtils.saveBitmap(croppedBitmap);
         }
 
-//        while (preCardName.size() == newCardName.size()) {
-//            System.out.println("Find solution: Make the user detect new card then move to the next solution"); // todo
-//        }
 
         runInBackground(
                 new Runnable() {

@@ -160,15 +160,6 @@ public class MainActivity extends AppCompatActivity {
         final List<Classifier.Recognition> mappedRecognitions =
                 new LinkedList<Classifier.Recognition>();
 
-        // Clean up the red rectangle
-//        if (isSecondTime) {
-//            for (final Classifier.Recognition result : results) {
-//                final RectF location = result.getLocation();
-//                if (location != null && result.getConfidence() >= MINIMUM_CONFIDENCE_TF_OD_API) {
-//                    //canvas
-//                }
-//            }
-//        }
 
         for (final Classifier.Recognition result : results) {
             final RectF location = result.getLocation();
