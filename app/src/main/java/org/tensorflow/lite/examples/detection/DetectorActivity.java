@@ -202,7 +202,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                 if (numberOfInstruction > 0) {
                                     Log.e("Instruct User: ", instructUserNew.get(indexOfInstruction));
                                     textMovement.setText("");
-                                    textMovement.setText(instructUserNew.get(indexOfInstruction) + "\n" +
+                                    textMovement.setText(instructUserNew.get(indexOfInstruction) + "\n\n" +
                                             "Then, please flip the card or move the king to an empty space.");
                                     indexOfInstruction++;
                                     numberOfInstruction--;
