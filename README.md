@@ -3,7 +3,7 @@ As a team we trained and detect playing card, and writing the algorithm to solve
 
 ---------------------
 
-## Train a custom mobile object detection model: [Roboflow](https://blog.roboflow.com/how-to-train-a-custom-mobile-object-detection-model/)
+### Train a custom mobile object detection model: [Roboflow](https://blog.roboflow.com/how-to-train-a-custom-mobile-object-detection-model/)
 
 ---------------------
 
