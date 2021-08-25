@@ -13,6 +13,6 @@ As a team we trained and detect playing card, and writing the algorithm to solve
 
 ---------------------
 ## The final Output:
-<img src="https://github.com/M0-AR/CDIO_04_Android/blob/master/android_00.jpeg" width="500" height="800">
-<img src="https://github.com/M0-AR/CDIO_04_Android/blob/master/android_01.jpeg" width="500" height="800">
-<img src="https://github.com/M0-AR/CDIO_04_Android/blob/master/android_02.jpeg" width="500" height="800">
+<img src="https://github.com/M0-AR/CDIO_04_Android/blob/master/android_00.jpeg" width="400" height="700">
+<img src="https://github.com/M0-AR/CDIO_04_Android/blob/master/android_01.jpeg" width="400" height="700">
+<img src="https://github.com/M0-AR/CDIO_04_Android/blob/master/android_02.jpeg" width="400" height="700">
