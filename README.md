@@ -1,4 +1,4 @@
-# Requirment: Help the user to solve Solitaire game. 
+## Requirment: Help the user to solve Solitaire game. 
 As a team we trained and detect playing card, and writing the algorithm to solve Solitaire game on android phone by using phone's camera. 
 
 ---------------------
